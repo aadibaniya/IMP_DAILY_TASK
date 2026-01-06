@@ -1,0 +1,41 @@
+===============================
+SSH ACCESS CONTROL (QUICK)
+===============================
+
+Disable SSH for a User
+---------------------
+sudo vim /etc/ssh/sshd_config
+DenyUsers devuser
+sudo sshd -t
+sudo systemctl reload sshd
+
+Allow SSH for Specific Users
+----------------------------
+sudo vim /etc/ssh/sshd_config
+AllowUsers ubuntu aaditya admin
+sudo sshd -t
+sudo systemctl reload sshd
+
+Allow SSH for Specific Group (Best)
+----------------------------------
+sudo groupadd sshusers
+sudo usermod -aG sshusers ubuntu
+sudo usermod -aG sshusers aaditya
+sudo vim /etc/ssh/sshd_config
+AllowGroups sshusers
+sudo sshd -t
+sudo systemctl reload sshd
+
+Remove SSH Access (Group)
+-------------------------
+sudo gpasswd -d aaditya sshusers
+
+Emergency Fix (Console)
+----------------------
+vi /etc/ssh/sshd_config
+systemctl restart sshd
+
+===============================
+END
+===============================
+
