@@ -39,3 +39,21 @@ systemctl restart sshd
 END
 ===============================
 
+
+" ================================
+" Change User Details
+" ================================
+
+" 1. Change login shell
+sudo usermod -s /bin/bash username
+sudo chsh -s /bin/bash username
+
+" 2. Change home directory
+sudo usermod -d /new/home/directory -m username
+
+" 3. Change primary group
+sudo usermod -g newgroup username
+
+" 4. Verify changes
+getent passwd username
+

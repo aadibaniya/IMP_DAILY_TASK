@@ -1,0 +1,34 @@
+" ================================
+" Task: Change User Details
+" Why: Role or team change
+" ================================
+
+" 1. Change the login shell for a user
+" Explanation: If the user switches role, they might need a different shell.
+" Option 1: Using usermod
+sudo usermod -s /bin/bash username
+" -s specifies the new login shell
+
+" Option 2: Using chsh
+sudo chsh -s /bin/bash username
+" chsh also changes the user's login shell
+
+" 2. Change the home directory for a user
+" Explanation: When a user's home directory needs to be updated (e.g., for a new project or role).
+sudo usermod -d /new/home/directory -m username
+" -d specifies the new home directory
+" -m moves the existing contents to the new directory
+
+" 3. Change the primary group of a user
+" Explanation: Useful when a user moves to a different team or group.
+sudo usermod -g newgroup username
+" -g sets the new primary group for the user
+
+"4. Check the user's primary group
+id username
+" The 'gid' field shows the primary group
+
+"5. Verification / Checking the changes
+" Check all details of the user
+getent passwd username
+" Shows: username, UID, GID, home directory, shell, etc.
