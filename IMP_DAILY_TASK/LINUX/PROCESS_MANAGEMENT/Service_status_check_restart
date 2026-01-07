@@ -1,0 +1,46 @@
+"=========================================
+" Task 2: Process / Service Management
+" Scenario: A critical service has stopped
+"=========================================
+
+"-----------------------------------------
+" 1. Check if the service is running
+"-----------------------------------------
+# Use systemctl to check status
+:!systemctl status nginx
+
+# Use ps to confirm process
+:!ps aux | grep nginx
+
+"-----------------------------------------
+" 2. Restart the service
+"-----------------------------------------
+:!sudo systemctl restart nginx
+
+"-----------------------------------------
+" 3. Verify service status after restart
+"-----------------------------------------
+:!systemctl status nginx
+
+"-----------------------------------------
+" 4. Check logs if service fails again
+"-----------------------------------------
+:!journalctl -u nginx -n 50
+
+"-----------------------------------------
+" 5. Verify service is listening (optional)
+"-----------------------------------------
+:!ss -tulnp | grep nginx
+
+"-----------------------------------------
+" 6. Enable service on reboot
+"-----------------------------------------
+:!sudo systemctl enable nginx
+
+"-----------------------------------------
+" Notes:
+" - nginx is example, replace with actual service
+" - ps aux | grep <service> helps check process
+" - journalctl shows why service failed
+" - Useful for production troubleshooting
+
