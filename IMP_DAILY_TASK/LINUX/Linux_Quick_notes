@@ -57,3 +57,15 @@ sudo usermod -g newgroup username
 " 4. Verify changes
 getent passwd username
 
+
+# Force Password Change
+
+## Force password change on next login
+sudo chage -d 0 developer
+
+## Set password expiry (90 days)
+sudo chage -M 90 developer
+
+## View password expiry information
+sudo chage -l developer
+
