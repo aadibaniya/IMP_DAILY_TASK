@@ -1,0 +1,71 @@
+===============================
+SSH ACCESS CONTROL (QUICK)
+===============================
+
+Disable SSH for a User
+---------------------
+sudo vim /etc/ssh/sshd_config
+DenyUsers devuser
+sudo sshd -t
+sudo systemctl reload sshd
+
+Allow SSH for Specific Users
+----------------------------
+sudo vim /etc/ssh/sshd_config
+AllowUsers ubuntu aaditya admin
+sudo sshd -t
+sudo systemctl reload sshd
+
+Allow SSH for Specific Group (Best)
+----------------------------------
+sudo groupadd sshusers
+sudo usermod -aG sshusers ubuntu
+sudo usermod -aG sshusers aaditya
+sudo vim /etc/ssh/sshd_config
+AllowGroups sshusers
+sudo sshd -t
+sudo systemctl reload sshd
+
+Remove SSH Access (Group)
+-------------------------
+sudo gpasswd -d aaditya sshusers
+
+Emergency Fix (Console)
+----------------------
+vi /etc/ssh/sshd_config
+systemctl restart sshd
+
+===============================
+END
+===============================
+
+
+" ================================
+" Change User Details
+" ================================
+
+" 1. Change login shell
+sudo usermod -s /bin/bash username
+sudo chsh -s /bin/bash username
+
+" 2. Change home directory
+sudo usermod -d /new/home/directory -m username
+
+" 3. Change primary group
+sudo usermod -g newgroup username
+
+" 4. Verify changes
+getent passwd username
+
+
+# Force Password Change
+
+## Force password change on next login
+sudo chage -d 0 developer
+
+## Set password expiry (90 days)
+sudo chage -M 90 developer
+
+## View password expiry information
+sudo chage -l developer
+
